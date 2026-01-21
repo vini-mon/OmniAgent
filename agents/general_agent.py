@@ -4,7 +4,9 @@ import os
 from dotenv import load_dotenv # Import the function to load .env variables
 
 from langchain_ollama import ChatOllama     # Import the Ollama Chat model
+
 from tools.calculator import add, sub, mul, divide  # Import the calculator tools
+from tools.cat_tools import get_random_cat_fact  # Import the cat fact tool
 
 load_dotenv()  # Load environment variables from .env file
 
@@ -28,7 +30,7 @@ def get_llm_with_tools():
 
     )
 
-    tools = [ add, sub, mul, divide ]  # List of available tools
+    tools = [ add, sub, mul, divide, get_random_cat_fact ]  # List of available tools
 
     # Binding the tools to the Model
     llm_with_tools = llm.bind_tools( tools )
