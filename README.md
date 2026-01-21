@@ -11,6 +11,7 @@ The project is built with Python, LangChain, and Ollama, running 100% locally wi
 - [Tools and Capabilities](#tools-and-capabilities)
 - [How to Run](#how-to-run)
 - [File Structure](#file-structure)
+- [Visual Example (Prompt Line)](#visual-example)
 - [Author](#author)
 
 ## Overview and Objectives
@@ -36,6 +37,7 @@ The agent evaluates every user input against two categories:
 | Query Type | Behavior | Example |
 | :--- | :--- | :--- |
 | **Mathematical** | **Strict Mode.** Must use tools. Execution is forced to be sequential (one step at a time). Mental calculation is forbidden. | "Calculate 15 * 27" |
+| **Cat Facts (API)** | **Hybrid Mode.** Fetches real-time data from an external API (catfact.ninja) and incorporates it into the response. | "Tell me a random fact about cats." |
 | **General Knowledge** | **Conversational Mode.** Uses internal training data. No tools are triggered. | "What is Star Wars?" |
 
 ### Sequential Reasoning Fix
@@ -58,7 +60,8 @@ The agent has access to atomic mathematical functions. It is prohibited from pas
 ### Bonus: External API Integration (Hybrid Mode) 🐱
 To demonstrate the agent's ability to interact with the internet (not just local functions), I integrated a public API. This transforms the project into a Hybrid Agent (Offline Logic + Online Data).
 
-get_random_cat_fact(): Performs an HTTP GET request to the Cat Fact API (catfact.ninja) to retrieve real-time data.
+
+* `get_random_cat_fact()`: Reques a HTTP GET using an open API to get random facts about cats.
 
 Protocol: The agent identifies keywords like "cat fact" or "curiosity about cats," triggers the API, and incorporates the external data into its final answer.
 
@@ -86,7 +89,7 @@ ollama pull llama3.1
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/vini-mon/OmniAgent
+git clone https://github.com/vini-mon/OmniAgent.git
 
 cd OmniAgent
 ```
@@ -134,6 +137,7 @@ pip install requests
 pip install langchain langchain-ollama python-dotenv
 ```
 ### Step 3: Configuration
+** This step is not really essential (there is no secrets API at the moment), but shows attention to security/best practices
 
 Create a .env file in the root directory to manage your configuration. You can use the provided example:
 
@@ -171,6 +175,8 @@ Run the main entry point. You will see a menu to select pre-defined test cases o
     │   ├── calculator.py      # Mathematical functions (add, sub, mul, div)
     │   └── cat_tools.py       # API Integration (HTTP Requests)
     │
+    ├── imgs/                  # Some images used in README.me
+    │
     ├── .env                   # Configuration file (not uploaded to git)
     ├── .env.example           # Example configuration
     ├── .gitignore             # Files to ignore (venv, keys)
@@ -181,11 +187,11 @@ Run the main entry point. You will see a menu to select pre-defined test cases o
 
 ```
 
-## Visual Example (Prompt Line)
+## Visual Example
 
 ### Running the program
 
-![Visual Example - Interface](imgs/visual_prompt.png)
+![Visual Example - Interface](imgs/visual_prompt_new.png)
 
 ### Internal thoughts (Math)
 
